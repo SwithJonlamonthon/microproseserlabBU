@@ -4,14 +4,16 @@
 
 void delayMs(int n);
 void ledpin(int a , int b);
+void formOfled(int number);
+
 int main(void) {
        
-        while (1) {
-								ledpin(1,3);
-               
-                delayMs(500); /* Step-5: delay function*/
-								ledpin(0,3);
-                delayMs(500); /* Step-7: delay function*/
+        while(1){
+			
+					
+						
+							
+
         }
         
 } /* Delay n milliseconds* The CPU core clock is set to MCGFLLCLK at 41.94 MHz ??? in SystemInit().*/
@@ -23,40 +25,45 @@ void delayMs(int n){
         }
 }
 
-void ledpin(int a , int b){
-			switch(b){
+void ledpin(int a , int b){  /*This function for RGB LED*/
+		
+		switch(b){
 				case 1:  /*For red led*/
-							SIM -> SCGC5 |= 0x400; /* Step-1: enable clock to Port B */
-							PORTB -> PCR[22] = 0x0100; /* Step-2: make PTE22 pin as GPIO */
-							PTB -> PDDR |= 0x0400000; /* Step-3: make PTE22 as output pin */
+							SIM -> SCGC5 |= 0x400; 
+							PORTB -> PCR[22] = 0x0100; 
+							PTB -> PDDR |= 0x0400000;
 								if (a == 1){
 								PTB -> PDOR &= !0x0400000;
 								}
-								else{
-								PTB -> PDOR |= 0x0400000; /* Step-4: turn on red LED */
+								else if(a == 0){
+								PTB -> PDOR = 0x0400000; 
 								}
+							SIM -> SCGC5 = 0x000;
 							break;
-				case 2:
-							SIM -> SCGC5 |= 0x2000; /* Step-1: enable clock to Port B */
-							PORTE -> PCR[26] = 0x0100; /* Step-2: make PTE22 pin as GPIO */
-							PTE -> PDDR |= 0x04000000; /* Step-3: make PTE22 as output pin */
+				case 2:  /*For green led*/
+							SIM -> SCGC5 |= 0x2000; 
+							PORTE -> PCR[26] = 0x0100; 
+							PTE -> PDDR |= 0x04000000; 
 								if (a == 1){
 									PTE -> PDOR &= !0x04000000;
 								}
-								else{
-									PTE -> PDOR |= 0x04000000; /* Step-4: turn on red LED */
+								else if(a == 0){
+									PTE -> PDOR = 0x04000000; 
 								}
 							break;
-				case 3:
-							SIM -> SCGC5 |= 0x400; /* Step-1: enable clock to Port B */
-							PORTB -> PCR[21] = 0x0100; /* Step-2: make PTE22 pin as GPIO */
-							PTB -> PDDR |= 0x0200000; /* Step-3: make PTE22 as output pin */
+				case 3:  /*For blue led*/
+							SIM -> SCGC5 |= 0x400; 
+							PORTB -> PCR[21] = 0x0100; 
+							PTB -> PDDR |= 0x0200000; 
 								if (a == 1){
 									PTB -> PDOR &= !0x0200000;
 								}
-								else{
-									PTB -> PDOR |= 0x0200000; /* Step-4: turn on red LED */
+								else if(a == 0){
+									PTB -> PDOR = 0x0200000; 
 								}
+							SIM -> SCGC5 = 0x000;
+							break;
+	
 					
 					
 		
@@ -67,5 +74,10 @@ void ledpin(int a , int b){
 			}
 		
 }
+
+
+
+
+
 
 
